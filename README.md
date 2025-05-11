@@ -1,0 +1,1 @@
+ai-detection-helper
