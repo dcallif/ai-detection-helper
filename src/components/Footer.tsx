@@ -15,7 +15,7 @@ export const Footer: React.FC = () => {
           </div>
           <div className="flex space-x-6">
             <a 
-              href="https://github.com/stackblitz/ai-detection-helper" 
+              href="https://github.com/dcallif/ai-detection-helper" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-gray-500 transition-colors duration-200"
