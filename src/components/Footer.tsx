@@ -14,7 +14,12 @@ export const Footer: React.FC = () => {
             </p>
           </div>
           <div className="flex space-x-6">
-            <a href="#" className="text-gray-400 hover:text-gray-500 transition-colors duration-200">
+            <a 
+              href="https://github.com/stackblitz/ai-detection-helper" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-gray-500 transition-colors duration-200"
+            >
               <Github className="h-5 w-5" />
             </a>
           </div>
