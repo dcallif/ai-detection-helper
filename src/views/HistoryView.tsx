@@ -1,9 +1,10 @@
 import React from 'react';
 import { HistoryItem } from '../types/analysis';
-import { Clock, Link, Trash2 } from 'lucide-react';
+import { Clock, Link, Trash2, Copy, CheckCircle } from 'lucide-react';
 
 export const HistoryView: React.FC = () => {
   const [history, setHistory] = React.useState<HistoryItem[]>([]);
+  const [copiedId, setCopiedId] = React.useState<number | null>(null);
 
   React.useEffect(() => {
     const historyData = localStorage.getItem('aiDetectorHistory');
@@ -21,6 +22,16 @@ export const HistoryView: React.FC = () => {
     const updatedHistory = history.filter(item => item.id !== id);
     localStorage.setItem('aiDetectorHistory', JSON.stringify(updatedHistory));
     setHistory(updatedHistory);
+  };
+
+  const copyContent = async (id: number, content: string) => {
+    try {
+      await navigator.clipboard.writeText(content);
+      setCopiedId(id);
+      setTimeout(() => setCopiedId(null), 2000);
+    } catch (err) {
+      console.error('Failed to copy content:', err);
+    }
   };
 
   if (history.length === 0) {
@@ -68,12 +79,26 @@ export const HistoryView: React.FC = () => {
                   </div>
                 )}
               </div>
-              <button
-                onClick={() => deleteHistoryItem(item.id)}
-                className="text-gray-400 hover:text-red-600 transition-colors duration-200"
-              >
-                <Trash2 className="h-4 w-4" />
-              </button>
+              <div className="flex items-center space-x-2">
+                <button
+                  onClick={() => copyContent(item.id, item.content)}
+                  className="text-gray-400 hover:text-blue-600 transition-colors duration-200 flex items-center"
+                  title="Copy content"
+                >
+                  {copiedId === item.id ? (
+                    <CheckCircle className="h-4 w-4" />
+                  ) : (
+                    <Copy className="h-4 w-4" />
+                  )}
+                </button>
+                <button
+                  onClick={() => deleteHistoryItem(item.id)}
+                  className="text-gray-400 hover:text-red-600 transition-colors duration-200"
+                  title="Delete from history"
+                >
+                  <Trash2 className="h-4 w-4" />
+                </button>
+              </div>
             </div>
 
             <div className="mb-3">
