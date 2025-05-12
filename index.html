@@ -10,9 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <meta name="description" content="Analyze text to determine if it's written by AI or human with our advanced AI content detector.">
     <script>
-      if (localStorage.getItem('darkMode') === 'true' ||
-          (!('darkMode' in localStorage) &&
-           window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      // Check for saved theme preference or system preference
+      const darkMode = localStorage.getItem('darkMode');
+      if (darkMode === 'true' || (!darkMode && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
         document.documentElement.classList.add('dark');
       }
     </script>

@@ -4,16 +4,11 @@ import { Moon, Sun } from 'lucide-react';
 export const ThemeToggle: React.FC = () => {
   const [isDark, setIsDark] = React.useState(() => {
     if (typeof window !== 'undefined') {
-      return document.documentElement.classList.contains('dark');
+      const darkMode = localStorage.getItem('darkMode');
+      return darkMode === 'true' || (!darkMode && window.matchMedia('(prefers-color-scheme: dark)').matches);
     }
     return false;
   });
-
-  React.useEffect(() => {
-    const isDarkStored = localStorage.getItem('darkMode') === 'true';
-    setIsDark(isDarkStored);
-    document.documentElement.classList.toggle('dark', isDarkStored);
-  }, []);
 
   const toggleTheme = () => {
     const newDarkMode = !isDark;
@@ -21,6 +16,20 @@ export const ThemeToggle: React.FC = () => {
     document.documentElement.classList.toggle('dark', newDarkMode);
     localStorage.setItem('darkMode', String(newDarkMode));
   };
+
+  // Sync with system theme changes
+  React.useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleChange = (e: MediaQueryListEvent) => {
+      if (!localStorage.getItem('darkMode')) {
+        setIsDark(e.matches);
+        document.documentElement.classList.toggle('dark', e.matches);
+      }
+    };
+
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
 
   return (
     <button
