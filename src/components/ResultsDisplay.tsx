@@ -25,7 +25,7 @@ export const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ results }) => {
   };
 
   return (
-    <div className="mt-8 bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden animate-fadeIn">
+    <div className="mt-8 bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden animate-fadeIn transition-colors duration-200">
       <div className="p-6 pb-4">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">Analysis Results</h2>
         
