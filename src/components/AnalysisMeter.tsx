@@ -29,6 +29,12 @@ export const AnalysisMeter: React.FC<AnalysisMeterProps> = ({ probability }) => 
     return 'AI';
   };
 
+  const getLabelColor = () => {
+    if (probability <= 30) return 'text-green-600 dark:text-green-400';
+    if (probability <= 70) return 'text-yellow-600 dark:text-yellow-400';
+    return 'text-red-600 dark:text-red-400';
+  };
+
   return (
     <div className="flex flex-col items-center">
       <div className="relative w-36 h-36">
@@ -41,6 +47,7 @@ export const AnalysisMeter: React.FC<AnalysisMeterProps> = ({ probability }) => 
             fill="none"
             stroke="#E5E7EB"
             strokeWidth="10"
+            className="dark:stroke-gray-700"
           />
           
           {/* Progress circle - using stroke-dasharray and stroke-dashoffset for animation */}
@@ -61,10 +68,10 @@ export const AnalysisMeter: React.FC<AnalysisMeterProps> = ({ probability }) => 
         
         {/* Percentage display */}
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className="text-3xl font-bold" style={{ color: getColor() }}>
+          <span className={`text-3xl font-bold ${getLabelColor()}`}>
             {Math.round(currentValue)}%
           </span>
-          <span className="text-sm text-gray-600">{getLabel()}</span>
+          <span className="text-sm text-gray-600 dark:text-gray-400">{getLabel()}</span>
         </div>
       </div>
     </div>
