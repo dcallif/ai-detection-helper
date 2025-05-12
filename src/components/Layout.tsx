@@ -10,7 +10,7 @@ interface LayoutProps {
 
 export const Layout: React.FC<LayoutProps> = ({ children, onNavigate, currentView }) => {
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
+    <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
       <Header onNavigate={onNavigate} currentView={currentView} />
       <main className="flex-grow container mx-auto px-4 py-8 sm:px-6 lg:px-8">
         {children}

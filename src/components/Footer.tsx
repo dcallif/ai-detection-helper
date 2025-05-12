@@ -5,11 +5,11 @@ export const Footer: React.FC = () => {
   const year = new Date().getFullYear();
   
   return (
-    <footer className="bg-white border-t border-gray-200">
+    <footer className="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
       <div className="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center md:flex-row md:justify-between">
           <div className="mb-4 md:mb-0">
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-gray-500 dark:text-gray-400">
               © {year} AI Detector. All rights reserved.
             </p>
           </div>
@@ -18,7 +18,7 @@ export const Footer: React.FC = () => {
               href="https://github.com/dcallif/ai-detection-helper" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-gray-500 transition-colors duration-200"
+              className="text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400 transition-colors duration-200"
             >
               <Github className="h-5 w-5" />
             </a>
