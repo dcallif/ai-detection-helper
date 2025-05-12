@@ -2,28 +2,42 @@ import React from 'react';
 import { Moon, Sun } from 'lucide-react';
 
 export const ThemeToggle: React.FC = () => {
-  const [isDark, setIsDark] = React.useState(() => {
+  const [theme, setTheme] = React.useState<'light' | 'dark'>(() => {
     if (typeof window !== 'undefined') {
-      const darkMode = localStorage.getItem('darkMode');
-      return darkMode === 'true' || (!darkMode && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        return 'dark';
+      }
+      return 'light';
     }
-    return false;
+    return 'light';
   });
 
   const toggleTheme = () => {
-    const newDarkMode = !isDark;
-    setIsDark(newDarkMode);
-    document.documentElement.classList.toggle('dark', newDarkMode);
-    localStorage.setItem('darkMode', String(newDarkMode));
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    
+    // Update localStorage and class
+    if (newTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+      localStorage.theme = 'dark';
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.theme = 'light';
+    }
   };
 
-  // Sync with system theme changes
+  // Handle system theme changes
   React.useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    
     const handleChange = (e: MediaQueryListEvent) => {
-      if (!localStorage.getItem('darkMode')) {
-        setIsDark(e.matches);
-        document.documentElement.classList.toggle('dark', e.matches);
+      if (!('theme' in localStorage)) {
+        setTheme(e.matches ? 'dark' : 'light');
+        if (e.matches) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
       }
     };
 
@@ -37,7 +51,7 @@ export const ThemeToggle: React.FC = () => {
       className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
       aria-label="Toggle theme"
     >
-      {isDark ? (
+      {theme === 'dark' ? (
         <Sun className="h-5 w-5 text-gray-600 dark:text-gray-300" />
       ) : (
         <Moon className="h-5 w-5 text-gray-600 dark:text-gray-300" />
