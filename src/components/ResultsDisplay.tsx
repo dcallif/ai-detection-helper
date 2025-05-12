@@ -25,9 +25,9 @@ export const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ results }) => {
   };
 
   return (
-    <div className="mt-8 bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden animate-fadeIn">
+    <div className="mt-8 bg-white rounded-xl shadow-md overflow-hidden animate-fadeIn">
       <div className="p-6 pb-4">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">Analysis Results</h2>
+        <h2 className="text-2xl font-bold text-gray-900 mb-4">Analysis Results</h2>
         
         <div className="flex flex-col sm:flex-row items-center mb-6">
           <div className="w-full sm:w-1/3 mb-4 sm:mb-0">
@@ -35,18 +35,18 @@ export const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ results }) => {
           </div>
           
           <div className="w-full sm:w-2/3 pl-0 sm:pl-8">
-            <h3 className="text-xl font-medium text-gray-900 dark:text-gray-100 mb-2">
+            <h3 className="text-xl font-medium text-gray-900 mb-2">
               {results.aiProbability > 70 
                 ? 'Likely AI Generated' 
                 : results.aiProbability > 40 
                   ? 'Possibly AI Generated' 
                   : 'Likely Human Written'}
             </h3>
-            <p className="text-gray-600 dark:text-gray-300 mb-4">{results.summary}</p>
+            <p className="text-gray-600 mb-4">{results.summary}</p>
             
             <button
               onClick={copyToClipboard}
-              className="inline-flex items-center text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors duration-200"
+              className="inline-flex items-center text-sm text-blue-600 hover:text-blue-800 transition-colors duration-200"
             >
               {copied ? (
                 <>
@@ -64,10 +64,10 @@ export const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ results }) => {
         </div>
       </div>
       
-      <div className="border-t border-gray-200 dark:border-gray-700">
+      <div className="border-t border-gray-200">
         <button
           onClick={toggleDetails}
-          className="w-full px-6 py-3 text-left text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors duration-200 focus:outline-none flex justify-between items-center"
+          className="w-full px-6 py-3 text-left text-sm font-medium text-blue-600 hover:text-blue-800 transition-colors duration-200 focus:outline-none flex justify-between items-center"
         >
           <span>Analysis Details</span>
           {showDetails ? (
