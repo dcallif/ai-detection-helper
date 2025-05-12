@@ -27,10 +27,10 @@ export const DetectorView: React.FC = () => {
   return (
     <div className="max-w-5xl mx-auto">
       <section className="mb-12 text-center">
-        <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+        <h1 className="text-4xl font-bold text-gray-900 mb-4">
           AI Content Detector
         </h1>
-        <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
           Analyze text to determine if it's written by AI or human, with detailed insights into the content's characteristics.
         </p>
       </section>
@@ -45,9 +45,9 @@ export const DetectorView: React.FC = () => {
       />
 
       {error && (
-        <div className="mt-6 p-4 bg-red-50 dark:bg-red-900/30 rounded-lg border border-red-200 dark:border-red-800 flex items-start">
-          <AlertCircle className="h-5 w-5 text-red-500 dark:text-red-400 mr-2 flex-shrink-0 mt-0.5" />
-          <p className="text-red-700 dark:text-red-300">{error}</p>
+        <div className="mt-6 p-4 bg-red-50 rounded-lg border border-red-200 flex items-start">
+          <AlertCircle className="h-5 w-5 text-red-500 mr-2 flex-shrink-0 mt-0.5" />
+          <p className="text-red-700">{error}</p>
         </div>
       )}
 
