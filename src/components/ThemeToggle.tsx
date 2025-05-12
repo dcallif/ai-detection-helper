@@ -4,25 +4,23 @@ import { Moon, Sun } from 'lucide-react';
 export const ThemeToggle: React.FC = () => {
   const [theme, setTheme] = React.useState<'light' | 'dark'>(() => {
     if (typeof window !== 'undefined') {
-      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        return 'dark';
-      }
-      return 'light';
+      return localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+        ? 'dark'
+        : 'light';
     }
     return 'light';
   });
 
   const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
     setTheme(newTheme);
     
-    // Update localStorage and class
     if (newTheme === 'dark') {
       document.documentElement.classList.add('dark');
-      localStorage.theme = 'dark';
+      localStorage.setItem('theme', 'dark');
     } else {
       document.documentElement.classList.remove('dark');
-      localStorage.theme = 'light';
+      localStorage.setItem('theme', 'light');
     }
   };
 
@@ -31,7 +29,7 @@ export const ThemeToggle: React.FC = () => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     
     const handleChange = (e: MediaQueryListEvent) => {
-      if (!('theme' in localStorage)) {
+      if (!localStorage.getItem('theme')) {
         setTheme(e.matches ? 'dark' : 'light');
         if (e.matches) {
           document.documentElement.classList.add('dark');
